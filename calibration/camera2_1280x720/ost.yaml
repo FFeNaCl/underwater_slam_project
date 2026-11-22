@@ -1,0 +1,59 @@
+# 由 underwater_perception/tools/calibrate_cli.py 生成
+# 视图数: 25/25, RMS=0.4026 px, 等级=fair
+# 单位: 内参为像素; 方格边长 0.0290 m; 图案 9x6 内角点
+image_width: 1280
+image_height: 720
+camera_name: water_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+  - 740.5892095200245
+  - 0.0
+  - 647.781162069427
+  - 0.0
+  - 739.1580340702056
+  - 369.7014202720402
+  - 0.0
+  - 0.0
+  - 1.0
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data:
+  - 0.058153620990556903
+  - -0.010099574637538371
+  - -0.0006923737234015134
+  - -0.00024248556590063033
+  - -0.17284921457949246
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data:
+  - 1.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+  - 740.5892095200245
+  - 0.0
+  - 647.781162069427
+  - 0.0
+  - 0.0
+  - 747.9223427010089
+  - 369.2710117531401
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  - 0.0
+avg_reprojection_error: 0.40258867975449775

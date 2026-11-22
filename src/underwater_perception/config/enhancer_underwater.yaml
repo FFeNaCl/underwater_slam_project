@@ -1,0 +1,47 @@
+# 图像增强节点参数（image_enhancer_cpp）
+#
+# 说明：这份是本包内**自包含副本**，让 launch 单独就能跑起来并做无硬件验证。
+# 权威文件是项目根目录的 `underwater_slam_project/config/enhancer_underwater.yaml`；
+# 正式实验请用那份（launch 参数 enhancer_params 指过去即可）：
+#   ros2 launch underwater_perception underwater_pipeline.launch.py \
+#     enhancer_params:=/home/hu/underwater_slam_project/config/enhancer_underwater.yaml
+#
+# 标定完成后（calibrate_cli / calibration_node 会输出 enhancer_camera_params.yaml）：
+#   把其中的 camera_matrix（9 个数）与 distortion_coeffs（k1 k2 p1 p2 k3）填到下面，
+#   并把 use_undistort 改成 true。注意 camera_matrix 是行优先的 9 个数。
+
+image_enhancer_cpp:
+  ros__parameters:
+    input_topic: /image_raw
+    output_topic: /image_enhanced
+    debug_topic: /image_enhanced_debug
+    publish_debug_view: false
+
+    # 水下色彩与对比度
+    use_red_compensation: true    # 红通道补偿：水下红光衰减最快
+    red_gain_limit: 2.5           # 红通道增益上限，避免噪声被放大
+    use_gray_world: true          # 灰度世界白平衡
+    use_clahe: true               # 局部对比度增强（LAB 的 L 通道）
+    clahe_clip_limit: 3.0         # 浑浊度越高可适当加大（2~4）
+    clahe_tile_size: 8
+    use_unsharp_mask: false
+    unsharp_amount: 0.35
+
+    # 去畸变：2026-11-19 标定（1280x720，25/25 视图，RMS 0.4026 px）
+    use_undistort: true
+    camera_matrix:
+    - 740.5892095200245
+    - 0.0
+    - 647.781162069427
+    - 0.0
+    - 739.1580340702056
+    - 369.7014202720402
+    - 0.0
+    - 0.0
+    - 1.0
+    distortion_coeffs:
+    - 0.058153620990556903
+    - -0.010099574637538371
+    - -0.0006923737234015134
+    - -0.00024248556590063033
+    - -0.17284921457949246

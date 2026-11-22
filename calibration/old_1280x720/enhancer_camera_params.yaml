@@ -1,0 +1,21 @@
+image_enhancer_cpp:
+  ros__parameters:
+    use_undistort: true
+    camera_matrix:
+    - 1026.144359582496
+    - 0.0
+    - 628.2374290835476
+    - 0.0
+    - 1026.5159153015916
+    - 432.6794406684962
+    - 0.0
+    - 0.0
+    - 1.0
+    distortion_coeffs:
+    - 0.28667678671125013
+    - -1.6474171205090167
+    - 0.016747888420161592
+    - -0.005890981970010171
+    - 3.767958312791996
+    calibration_source: water_camera
+    calibration_rms_px: 1.2773061026678327

@@ -1,0 +1,39 @@
+%YAML:1.0
+
+# 由 underwater_perception 标定程序生成，可直接放到 ros2_orb_slam3/orb_slam3/config/Monocular/
+# 视图数 25/25，RMS=1.2773 px，等级 poor
+
+Camera.type: "PinHole"
+Camera.fx: 1026.144360
+Camera.fy: 1026.515915
+Camera.cx: 628.237429
+Camera.cy: 432.679441
+
+Camera.k1: 0.28667679
+Camera.k2: -1.64741712
+Camera.p1: 0.01674789
+Camera.p2: -0.00589098
+Camera.k3: 3.76795831
+
+Camera.width: 1280
+Camera.height: 720
+Camera.fps: 30.0
+Camera.RGB: 0
+
+# 水下低纹理场景：特征点开多、FAST 阈值放低（可由 config 覆盖）
+ORBextractor.nFeatures: 1600
+ORBextractor.scaleFactor: 1.20
+ORBextractor.nLevels: 8
+ORBextractor.iniThFAST: 12
+ORBextractor.minThFAST: 5
+
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1.00
+Viewer.GraphLineWidth: 0.90
+Viewer.PointSize: 2.00
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3.00
+Viewer.ViewpointX: 0.00
+Viewer.ViewpointY: -0.70
+Viewer.ViewpointZ: -1.80
+Viewer.ViewpointF: 500.00

@@ -1,0 +1,91 @@
+# 几何旁路立方体识别参数（ROS 参数文件）
+#
+# 键名由 underwater_perception.core.params.CubeDetectorConfig.to_flat() 生成，
+# 想改哪个参数请在这里改，或命令行覆盖：
+#   ros2 run underwater_perception cube_detector --ros-args -p min_confidence:=0.35
+#
+# 现场调试顺序建议：
+#   1) color_preset / hsv_ranges：用 tools/cube_detect_cli.py --print-mask 看掩码
+#   2) min_area_px / max_area_fraction：先排除过大过小的干扰
+#   3) mode：默认 any 保召回；出现红色平面方块误检时改 cube_silhouette
+#   4) min_confidence / min_fill_ratio / min_convexity：最后再动
+#
+# 红色立方体的 HSV 说明：水下红橙衰减快，S/V 下限已放低；hsv_ranges 是 6 个一组
+#   (H_low, S_low, V_low, H_high, S_high, V_high)，H∈[0,180]，红色需要两段。
+cube_detector:
+  ros__parameters:
+    class_id: 0
+    class_name: cube
+    input_topic: /image_enhanced
+    annotated_topic: /detections/annotated
+    detections_topic: /detections
+    markers_topic: /detections/markers
+    publish_annotated: true
+    publish_markers: true
+    max_rate_hz: 0.0
+    color_preset: red
+    hsv_ranges:
+    - 0
+    - 90
+    - 55
+    - 10
+    - 255
+    - 255
+    - 170
+    - 90
+    - 55
+    - 180
+    - 255
+    - 255
+    require_red_dominance: true
+    red_dominance_ratio: 1.15
+    morph_open_kernel: 3
+    morph_close_kernel: 7
+    blur_kernel: 3
+    min_saturation: 0
+    min_value: 0
+    detect_width: 0
+    roi: []
+    min_area_px: 250
+    max_area_fraction: 0.25
+    approx_epsilon_ratio: 0.02
+    min_vertices: 4
+    max_vertices: 6
+    min_fill_ratio: 0.62
+    min_convexity: 0.88
+    min_aspect_ratio: 0.3
+    mode: any
+    use_interior_edge_check: true
+    canny_low: 40
+    canny_high: 120
+    min_edge_length_frac: 0.18
+    angle_cluster_tolerance_deg: 12.0
+    min_edge_directions: 2
+    min_edge_support: 0.1
+    min_internal_corner_response: 0.05
+    min_confidence: 0.45
+    nms_iou: 0.35
+    max_detections: 8
+    weight_fill: 1.0
+    weight_convexity: 0.8
+    weight_aspect: 0.6
+    weight_edge: 1.1
+    weight_color: 0.9
+    weight_area: 0.3
+    preferred_side_px: 60.0
+    enable_tracking: true
+    track_iou_threshold: 0.25
+    track_min_hits: 2
+    track_max_age: 8
+    track_max_center_jump_px: 0.0
+    track_publish_unconfirmed: false
+    enable_measurement: true
+    cube_edge_m: 0.05
+    camera_fx: null
+    camera_fy: null
+    camera_cx: null
+    camera_cy: null
+    dist_coeffs: []
+    min_side_px_for_distance: 12.0
+    use_silhouette_fit: true
+    fit_max_rms_px: 5.0

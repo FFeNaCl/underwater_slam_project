@@ -1,0 +1,41 @@
+# 真实环境（非 VRX 仿真）YOLO 检测参数
+#
+# 使用前只需要改一处：把下面的 model_path 填成训练好的 best.pt。
+# 在填之前节点会以 "model_unavailable" 模式运行，画面上会显示
+# "MODEL NOT LOADED - set model_path to best.pt"，不会假装检测成功。
+#
+# 启动：
+#   ros2 run yolo_vrx_bridge yolo_detector --ros-args \
+#     --params-file /home/hu/underwater_slam_project/config/yolo_real_camera.yaml
+#
+# 或：
+#   ros2 launch underwater_perception yolo_real.launch.py \
+#     model_path:=/home/hu/underwater_slam_project/models/best.pt
+
+yolo_detector:
+  ros__parameters:
+    input_topic: /image_enhanced
+    annotated_topic: /yolo/annotated
+    detections_topic: /yolo/detections
+
+    # 真实环境不做“标签回放”，模型没加载就明确报错
+    allow_label_replay: false
+    require_model: true
+
+    # ============================================================
+    # 已由 scripts/train_yolo.py 训练并复制到 models/best.pt
+    # 单类 rubbish，10 train / 3 valid，权重来源 last.pt
+    # 仅流程验证，不能代表真实泛化精度；正式实验请补数据后重训
+    # ============================================================
+    model_path: /home/hu/underwater_slam_project/models/best.pt
+
+    confidence_threshold: 0.25
+    imgsz: 640
+    device: ""              # "" = 自动；CPU 填 cpu；NVIDIA 显卡填 0
+    half: false             # 仅 CUDA 建议 true
+    max_det: 100
+
+    # 可选：数据集 data.yaml 的目录；留空时类别名从模型元数据读取
+    dataset_root: ""
+    label_topic: ""
+    frame_title: "Underwater YOLO (real camera)"

@@ -1,0 +1,90 @@
+# RViz2 配置：感知链路（增强图、检测标注、检测 Marker）
+#
+# 用法:
+#   rviz2 -d $(ros2 pkg prefix underwater_perception)/share/underwater_perception/config/rviz/detection.rviz
+#
+# Topic:
+#   /image_enhanced       增强图
+#   /detections/annotated 几何旁路标注图
+#   /yolo/annotated       YOLO 标注图
+#   /detections/markers   几何旁路 Marker
+# Fixed Frame: camera_optical
+
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /EnhancedImage1
+        - /DetectionAnnotated1
+        - /YOLOAnnotated1
+        - /DetectionMarkers1
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: EnhancedImage
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /image_enhanced
+      Max Value: 1
+      Min Value: 0
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: DetectionAnnotated
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /detections/annotated
+      Max Value: 1
+      Min Value: 0
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: YOLOAnnotated
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /yolo/annotated
+      Max Value: 1
+      Min Value: 0
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: DetectionMarkers
+      Namespaces: {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /detections/markers
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: camera_optical
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Value: true
+Window Geometry:
+  Height: 900
+  Width: 1500
+  Displays:
+    collapsed: false
+  Views:
+    collapsed: false

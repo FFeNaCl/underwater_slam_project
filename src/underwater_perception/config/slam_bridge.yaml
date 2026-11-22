@@ -1,0 +1,24 @@
+# SLAM 输入桥接参数：把普通图像话题喂给 ros2_orb_slam3 的 C++ 节点
+#
+# 关键约束（不要随意改）：
+#   target_* 三个话题名是 ros2_orb_slam3 的 C++ 节点**硬编码**的，改了必须同步改 C++。
+#   settings_name 会被拼成 <settings_file_path_arg>/<settings_name>.yaml，
+#   所以启动 C++ 节点时要把它指向存放该 yaml 的目录（见 launch/slam_pipeline.launch.py）。
+
+slam_input_bridge:
+  ros__parameters:
+    image_topic: /image_enhanced            # 上游输入（增强后的图像；不标定也可直接用 /image_raw）
+    target_image_topic: /mono_py_driver/img_msg
+    target_timestep_topic: /mono_py_driver/timestep_msg
+    config_request_topic: /mono_py_driver/experiment_settings
+    config_ack_topic: /mono_py_driver/exp_settings_ack
+    settings_name: water_1280x480           # 对应 orb_slam3/config/Monocular/<这个名字>.yaml
+
+    use_header_stamp: true                  # 用图像头时间戳；合成/无时间戳数据会自动回退到节点时钟
+    min_dt_s: 0.001                         # 保证时间戳严格递增（ORB-SLAM3 依赖它排序）
+    max_rate_hz: 0.0                        # 0 = 不限频；相机帧率过高时可限制（例如 20.0）
+    handshake_retry_s: 0.5                  # 未收到 ACK 时的重发间隔
+    rehandshake_period_s: 0.0               # >0 表示收到 ACK 后仍周期性重发（C++ 节点重启可自动恢复）
+
+    output_encoding: mono8                  # ORB-SLAM3 只用灰度；mono8 比 bgr8 少 2/3 数据量
+    status_topic: /slam_bridge/status

@@ -1,0 +1,26 @@
+# 真实相机 YOLO 数据集采集节点参数
+#
+# 用法：
+#   ros2 launch underwater_perception dataset_capture.launch.py \
+#     output_dir:=/home/hu/underwater_slam_project/datasets/real_underwater/raw \
+#     image_topic:=/image_enhanced
+#
+# 采集完成后：
+#   ros2 service call /dataset_capture/stop std_srvs/srv/Trigger "{}"
+#   ros2 service call /dataset_capture/snapshot std_srvs/srv/Trigger "{}"   # 补拍单帧
+#
+# 重要：训练集/验证集要按“视频或场次”拆分，不要随机拆相邻帧，否则验证集泄漏。
+
+dataset_capture:
+  ros__parameters:
+    image_topic: /image_enhanced          # 与部署链路一致；也可用 /image_raw
+    output_dir: /home/hu/underwater_slam_project/datasets/real_underwater/raw
+    save_interval_s: 0.5                  # 保存间隔（秒）：0.5 = 每秒 2 帧，避免高度重复
+    max_images: 0                         # 0 = 不限；建议一次 300~800 张
+    prefix: frame
+    image_format: jpg                     # jpg | png | bmp
+    write_empty_labels: false             # true 时生成同名空 txt，便于标注背景图
+    enabled: true                         # 节点启动后立即开始保存
+    min_width: 0                          # 小于该宽度不保存（0=不限制）
+    min_height: 0
+    status_topic: /dataset_capture/status

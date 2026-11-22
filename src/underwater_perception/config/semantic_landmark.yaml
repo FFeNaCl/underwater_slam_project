@@ -1,0 +1,42 @@
+# 语义地标参数：检测 + SLAM 位姿 -> 三维地标（RViz Marker + JSON）
+#
+# 两种来源在消息里用 source 字段区分，切勿混用其数值含义：
+#   triangulated    多视图三角化，与 SLAM 点云/轨迹**同一尺度**（推荐，用这个做建图结果）
+#   scale_fallback  单帧 + 已知边长估计，位置在**相机坐标系**下，只用于 SLAM 未初始化时提示
+
+semantic_landmark:
+  ros__parameters:
+    detections_topic: /detections           # 几何旁路默认发布在这里；YOLO 是 /yolo/detections
+    pose_topic: /slam/pose                  # 打补丁后的 ORB-SLAM3 节点发布（Twc：相机在世界系）
+    status_topic: /slam/status
+    landmarks_topic: /semantic/landmarks
+    markers_topic: /semantic/markers
+
+    # ---- 三角化门限 ----
+    min_views: 2                # 至少几个视角才允许三角化
+    min_parallax_deg: 2.0       # 两条射线的最小夹角：太小则三角化病态
+    min_baseline_m: 0.02        # 最小基线（米）：注意单目地图尺度非米，这里只做几何过滤
+    max_reproj_error_px: 12.0   # 像素重投影误差上限，超出的观测会被剔除
+    max_observations: 30        # 单个目标保留的观测数（滑动窗口）
+    stale_after_s: 5.0          # 多久没更新就停止发布（避免 RViz 里残留幽灵目标）
+
+    # ---- 无位姿时的退化行为 ----
+    allow_scale_fallback: true  # 没有 SLAM 位姿时用已知边长给近似点（相机系）
+    cube_edge_m: 0.05           # 立方体真实边长（米）：必须与 cube_detector.yaml 一致
+
+    # ---- 类别过滤（真实 YOLO 多类别时建议启用）----
+    # 只允许这些类别成为地标；空列表 = 不过滤。
+    # 例：["cube", "marker"]，避免鱼/气泡等动态目标被三角化进地图。
+    landmark_class_names: []
+    min_detection_confidence: 0.0   # 低于该置信度的检测不参与三角化
+
+    # ---- 相机内参（可选）----
+    # 标定完成后填入：检测消息里若已带 measurement.ray_camera 则可不填；填了更精确
+    camera_fx: 0.0
+    camera_fy: 0.0
+    camera_cx: 0.0
+    camera_cy: 0.0
+
+    # ---- 节点行为 ----
+    publish_period_s: 0.5       # 地标发布周期（秒）
+    max_pose_age_s: 1.0         # 位姿超过这个年龄就不用于三角化（避免用过期位姿算错位置）

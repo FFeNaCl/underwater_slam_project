@@ -1,0 +1,6 @@
+path: /home/hu/underwater_slam_project/datasets/rubbish_yolov8_prepared
+train: train/images
+val: valid/images
+nc: 1
+names:
+- rubbish

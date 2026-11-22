@@ -1,0 +1,46 @@
+# 相机标定参数（CLI 与 ROS 标定节点共用同一份文件）
+#
+# 当前实物默认值：棋盘格 8x6 内角点（= 9x7 个方格）、方格边长 25 mm。
+# 注意：cols/rows 是**内角点**数，与 `ros2 run camera_calibration cameracalibrator --size 8x6` 一致。
+#
+# 用法：
+#   python -m underwater_perception.tools.calibrate_cli --images ./calib_images --config config/calibration.yaml
+#   ros2 launch underwater_perception calibration.launch.py config_file:=<这个文件的绝对路径>
+
+calibration_node:
+  ros__parameters:
+    # ---- 图案 ----
+    pattern: chessboard        # chessboard | circles | charuco（charuco 需要 opencv-contrib）
+    cols: 8                    # 内角点列数
+    rows: 6                    # 内角点行数
+    square_size: 0.025         # 方格边长（米）。25 mm 就填 0.025
+
+    # ---- 采集要求 ----
+    min_views: 12              # 低于这个数量会明确警告（建议现场采 20~30 个角度）
+    max_views: 40              # 自动采集的上限
+    min_corners_ratio: 0.85    # 单视图至少检出多少比例的角点才算有效
+    coverage_grid: 3           # 角点分布覆盖度检查用的网格划分
+    min_coverage_cells: 3      # 至少覆盖多少个网格单元
+    subpix_window: 11          # 亚像素角点优化窗口（越大越慢越稳）
+
+    # ---- 求解选项 ----
+    fix_k3: false              # 畸变很小时可设 true（固定 k3=0 更稳）
+    fix_aspect_ratio: false
+    zero_tangent_dist: false
+    undistort_alpha: 0.0       # 0=保留全部像素（有黑边）；1=裁掉黑边
+
+    # ---- 输出 ----
+    camera_name: water_camera
+    output_dir: /home/hu/underwater_slam_project/calibration_out
+    orbslam3_settings_name: water_1280x480   # 生成 <这个名字>.yaml 给 ORB-SLAM3
+    fps: 30.0                  # 写进 ORB-SLAM3 配置的 Camera.fps
+    save_undistorted: true
+    save_debug_corners: true
+
+    # ---- 节点行为（CLI 会忽略这几项）----
+    image_topic: /image_enhanced
+    debug_topic: /calibration/debug
+    status_topic: /calibration/status
+    auto_capture: true         # 自动每隔 capture_interval_s 尝试采一帧
+    capture_interval_s: 1.0
+    publish_debug: true

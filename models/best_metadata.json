@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-11-19T19:14:36",
+  "dataset": "/home/hu/underwater_slam_project/datasets/rubbish_yolov8_prepared/data.yaml",
+  "classes": {
+    "0": "rubbish"
+  },
+  "model": "yolov8n.pt",
+  "epochs": 300,
+  "imgsz": 640,
+  "batch": 4,
+  "device": "0",
+  "train_dir": "/home/hu/underwater_slam_project/runs/yolo/rubbish_v2",
+  "best_pt": "/home/hu/underwater_slam_project/models/best.pt",
+  "source_best_pt": "/home/hu/underwater_slam_project/runs/yolo/rubbish_v2/weights/best.pt",
+  "note": "训练集很小，指标仅供流程验证；正式实验请补充真实水下数据。",
+  "exported_at": "2026-11-19T19:16:52",
+  "opset": 12,
+  "onnx": "/home/hu/underwater_slam_project/models/best.onnx",
+  "pt": "/home/hu/underwater_slam_project/models/best.pt",
+  "onnx_inputs": [
+    {
+      "name": "images",
+      "shape": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "type": "tensor(float)"
+    }
+  ],
+  "onnx_outputs": [
+    {
+      "name": "output0",
+      "shape": [
+        1,
+        5,
+        8400
+      ],
+      "type": "tensor(float)"
+    }
+  ],
+  "source_weights": "/home/hu/underwater_slam_project/runs/yolo/rubbish_v2/weights/last.pt",
+  "source_weight_name": "last.pt"
+}

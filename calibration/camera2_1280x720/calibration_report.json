@@ -1,0 +1,315 @@
+{
+  "generated_at": "2026-11-19T20:29:53",
+  "generator": "underwater_perception.core.calibration",
+  "config": {
+    "pattern": "chessboard",
+    "cols": 9,
+    "rows": 6,
+    "square_size_m": 0.029,
+    "min_views": 12,
+    "undistort_alpha": 0.0,
+    "fix_k3": false,
+    "fix_aspect_ratio": false,
+    "zero_tangent_dist": false
+  },
+  "result": {
+    "ok": true,
+    "message": "ok",
+    "image_size": {
+      "width": 1280,
+      "height": 720
+    },
+    "rms_reprojection_px": 0.40258867975449775,
+    "views_used": 25,
+    "views_total": 25,
+    "per_view_error_px": [
+      0.2944847047328949,
+      0.2742230296134949,
+      0.7106035947799683,
+      0.46647846698760986,
+      0.33980968594551086,
+      0.5183390378952026,
+      0.3147946000099182,
+      0.2793961465358734,
+      0.5709360837936401,
+      0.16870124638080597,
+      0.39183300733566284,
+      0.3229667842388153,
+      0.4197544753551483,
+      0.2586727440357208,
+      0.32649123668670654,
+      0.3145597279071808,
+      0.17286168038845062,
+      0.2500157952308655,
+      0.46891558170318604,
+      0.19136755168437958,
+      0.330869197845459,
+      0.8772566318511963,
+      0.36399391293525696,
+      0.20443768799304962,
+      0.3781772255897522
+    ],
+    "camera_matrix": [
+      [
+        740.5892095200245,
+        0.0,
+        647.781162069427
+      ],
+      [
+        0.0,
+        739.1580340702056,
+        369.7014202720402
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "distortion_coeffs": [
+      0.058153620990556903,
+      -0.010099574637538371,
+      -0.0006923737234015134,
+      -0.00024248556590063033,
+      -0.17284921457949246
+    ],
+    "quality_grade": "fair",
+    "warnings": [
+      "有 2 个视图的角点分布覆盖不足（网格 3x3），请让棋盘出现在画面不同区域与角度",
+      "水下标定使用针孔+径向畸变近似；防水壳、水深、镜头到玻璃距离改变后必须重标。"
+    ],
+    "pinhole_approx_note": "平面防水壳存在空气-玻璃-水折射，针孔+径向畸变仅为近似；壳/水深/镜头-玻璃距离改变后需要重标。",
+    "source": "gui"
+  },
+  "environment": {
+    "opencv": "4.13.0",
+    "numpy": "2.2.6"
+  },
+  "views": [
+    {
+      "source": "camera3#0",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 9,
+      "error_px": 0.2944847047328949,
+      "reason": ""
+    },
+    {
+      "source": "camera3#1",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 9,
+      "error_px": 0.2742230296134949,
+      "reason": ""
+    },
+    {
+      "source": "camera3#2",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 6,
+      "error_px": 0.7106035947799683,
+      "reason": ""
+    },
+    {
+      "source": "camera3#3",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 6,
+      "error_px": 0.46647846698760986,
+      "reason": ""
+    },
+    {
+      "source": "camera3#4",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 7,
+      "error_px": 0.33980968594551086,
+      "reason": ""
+    },
+    {
+      "source": "camera3#5",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 6,
+      "error_px": 0.5183390378952026,
+      "reason": ""
+    },
+    {
+      "source": "camera3#6",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 5,
+      "error_px": 0.3147946000099182,
+      "reason": ""
+    },
+    {
+      "source": "camera3#7",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.2793961465358734,
+      "reason": ""
+    },
+    {
+      "source": "camera3#8",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 6,
+      "error_px": 0.5709360837936401,
+      "reason": ""
+    },
+    {
+      "source": "camera3#9",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.16870124638080597,
+      "reason": ""
+    },
+    {
+      "source": "camera3#10",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 5,
+      "error_px": 0.39183300733566284,
+      "reason": ""
+    },
+    {
+      "source": "camera3#11",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 6,
+      "error_px": 0.3229667842388153,
+      "reason": ""
+    },
+    {
+      "source": "camera3#12",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.4197544753551483,
+      "reason": ""
+    },
+    {
+      "source": "camera3#13",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.2586727440357208,
+      "reason": ""
+    },
+    {
+      "source": "camera3#14",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 5,
+      "error_px": 0.32649123668670654,
+      "reason": ""
+    },
+    {
+      "source": "camera3#15",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.3145597279071808,
+      "reason": ""
+    },
+    {
+      "source": "camera3#16",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.17286168038845062,
+      "reason": ""
+    },
+    {
+      "source": "camera3#17",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.2500157952308655,
+      "reason": ""
+    },
+    {
+      "source": "camera3#18",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 2,
+      "error_px": 0.46891558170318604,
+      "reason": ""
+    },
+    {
+      "source": "camera3#19",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 2,
+      "error_px": 0.19136755168437958,
+      "reason": ""
+    },
+    {
+      "source": "camera3#20",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.330869197845459,
+      "reason": ""
+    },
+    {
+      "source": "camera3#21",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 5,
+      "error_px": 0.8772566318511963,
+      "reason": ""
+    },
+    {
+      "source": "camera3#22",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 6,
+      "error_px": 0.36399391293525696,
+      "reason": ""
+    },
+    {
+      "source": "camera3#23",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 4,
+      "error_px": 0.20443768799304962,
+      "reason": ""
+    },
+    {
+      "source": "camera3#24",
+      "accepted": true,
+      "method": "SB",
+      "corner_ratio": 1.0,
+      "coverage_cells": 5,
+      "error_px": 0.3781772255897522,
+      "reason": ""
+    }
+  ]
+}

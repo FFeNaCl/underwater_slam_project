@@ -1,0 +1,198 @@
+{
+  "generated_at": "2026-09-10T11:48:58",
+  "elapsed_s": 2.4786791801452637,
+  "passed": true,
+  "thresholds": {
+    "detection_rate": 0.9,
+    "min_iou": 0.6,
+    "max_distance_rel_error": 0.25,
+    "fx_rel_error": 0.03,
+    "fy_rel_error": 0.03,
+    "principal_point_error_px": 8.0,
+    "calibration_rms_px": 1.0,
+    "landmark_error_m": 0.03,
+    "track_id_stability": 1.0
+  },
+  "checks": [
+    {
+      "name": "message_contract",
+      "passed": true,
+      "metrics": {
+        "has_legacy_keys": true,
+        "detection_keys": [
+          "class_id",
+          "class_name",
+          "confidence",
+          "detector",
+          "geometry",
+          "measurement",
+          "track_id",
+          "xyxy"
+        ],
+        "roundtrip_ok": true,
+        "size_bytes": 799
+      },
+      "notes": "",
+      "artifacts": []
+    },
+    {
+      "name": "geometry_detection",
+      "passed": true,
+      "metrics": {
+        "detection_rate": 1.0,
+        "python": "3.12",
+        "opencv": "5.0.0",
+        "numpy": "2.5.3",
+        "min_iou": 0.9326818675352877,
+        "mean_iou": 0.9677598729109046,
+        "vertex_counts": [
+          4,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "max_distance_rel_error": 0.009038658142252552,
+        "n_poses": 6
+      },
+      "notes": "",
+      "artifacts": [
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\detect_frontal.png",
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\detect_three_faces.png",
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\detect_oblique_left.png",
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\detect_oblique_up.png",
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\detect_far.png",
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\detect_near.png"
+      ]
+    },
+    {
+      "name": "false_positive_suppression",
+      "passed": true,
+      "metrics": {
+        "permissive_counts": {
+          "background": 0,
+          "blue_cube": 0,
+          "flat_red_square": 1
+        },
+        "strict_counts": {
+          "background": 0,
+          "blue_cube": 0,
+          "flat_red_square": 0
+        }
+      },
+      "notes": "严格模式(cube_silhouette)要求内部棱线证据，可拒绝红色平面方块；默认 any 模式保召回，会接受平面方块（见 docs/KNOWN_LIMITS 说明）",
+      "artifacts": []
+    },
+    {
+      "name": "tracking_stability",
+      "passed": true,
+      "metrics": {
+        "frames_published": 9,
+        "unique_track_ids": 1,
+        "track_ids": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "notes": "",
+      "artifacts": []
+    },
+    {
+      "name": "calibration_math",
+      "passed": true,
+      "metrics": {
+        "with_distortion": true,
+        "accepted_views": 18,
+        "rejected_views": 0,
+        "rms_px": 0.4083212061642611,
+        "fx_truth": 700.0,
+        "fx_est": 705.6018291053688,
+        "fx_rel_error": 0.008002613007669685,
+        "fy_rel_error": 0.008096635726028093,
+        "principal_point_error_px": 2.3649660216467114,
+        "distortion_truth": [
+          0.05,
+          -0.08,
+          0.001,
+          -0.0008,
+          0.01
+        ],
+        "distortion_est": [
+          0.06899120512825117,
+          -0.1397592442684364,
+          0.0029312891005396752,
+          -0.0011569439999459786,
+          0.022684141696139287
+        ],
+        "quality_grade": "fair",
+        "outputs": {
+          "ost": "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\calibration\\ost.yaml",
+          "orbslam3": "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\calibration\\water_1280x480.yaml",
+          "enhancer": "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\calibration\\enhancer_camera_params.yaml",
+          "report": "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\calibration\\calibration_report.json"
+        },
+        "warnings": [
+          "有 8 个视图的角点分布覆盖不足（网格 3x3），请让棋盘出现在画面不同区域与角度",
+          "水下标定使用针孔+径向畸变近似；防水壳、水深、镜头到玻璃距离改变后必须重标。"
+        ],
+        "k1_est": 0.06899120512825117,
+        "k1_truth": 0.05,
+        "k1_abs_error": 0.01899120512825117,
+        "k2_abs_error": 0.05975924426843639
+      },
+      "notes": "",
+      "artifacts": [
+        "D:\\DeepSeek Harness\\underwater_slam_ws\\selftest_out\\calibration_corners.png"
+      ]
+    },
+    {
+      "name": "landmark_triangulation",
+      "passed": true,
+      "metrics": {
+        "n_triangulated": 7,
+        "final_error_m": 3.7795273550507235e-15,
+        "mean_error_m": 3.688103695675604e-14,
+        "landmark": {
+          "landmark_id": 1,
+          "track_id": 1,
+          "class_name": "cube",
+          "frame_id": "map",
+          "position": [
+            0.05000000000000018,
+            -0.02000000000000006,
+            1.2000000000000037
+          ],
+          "n_views": 8,
+          "reproj_error_px": 4.0269660858327693e-13,
+          "triangulation_error": 7.263728629715579e-16,
+          "source": "triangulated",
+          "confidence": 0.9,
+          "first_stamp": 0.0,
+          "last_stamp": 7.0,
+          "distance_m": null
+        },
+        "cube_truth": [
+          0.05,
+          -0.02,
+          1.2
+        ]
+      },
+      "notes": "",
+      "artifacts": []
+    }
+  ],
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "opencv": "5.0.0",
+    "numpy": "2.5.3"
+  },
+  "disclaimer": "本报告全部基于合成数据。合成数据不包含真实水下的散射、浑浊、运动模糊、镜头污渍与防水壳折射，因此不能作为真实环境下性能的证据；真实验证清单见 docs/UNVERIFIED.md。"
+}

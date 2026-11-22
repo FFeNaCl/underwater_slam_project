@@ -1,0 +1,35 @@
+image_enhancer_cpp:
+  ros__parameters:
+    input_topic: /image_raw
+    output_topic: /image_enhanced
+    debug_topic: /image_enhanced_debug
+    publish_debug_view: true
+
+    use_red_compensation: true
+    red_gain_limit: 2.5
+    use_gray_world: true
+    use_clahe: true
+    clahe_clip_limit: 3.0
+    clahe_tile_size: 8
+    use_unsharp_mask: false
+    unsharp_amount: 0.35
+
+    use_undistort: true
+    # 2026-11-19 标定结果（1280x720，25/25 视图，RMS 0.4026 px）
+    # camera_matrix 行优先 9 个数；distortion_coeffs = k1 k2 p1 p2 k3
+    camera_matrix:
+    - 740.5892095200245
+    - 0.0
+    - 647.781162069427
+    - 0.0
+    - 739.1580340702056
+    - 369.7014202720402
+    - 0.0
+    - 0.0
+    - 1.0
+    distortion_coeffs:
+    - 0.058153620990556903
+    - -0.010099574637538371
+    - -0.0006923737234015134
+    - -0.00024248556590063033
+    - -0.17284921457949246
